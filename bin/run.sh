@@ -2,7 +2,7 @@
 
 set -e
 
-[ "$DEBUG" == "1" ] && set -x
+[ "$DEBUG" == "1" ] && set -x && set +e
 
 if [ "${GLUSTER_PEER}" == "**ChangeMe**" ]; then
    echo "ERROR: You did not specify "GLUSTER_PEER" environment variable - Exiting..."
