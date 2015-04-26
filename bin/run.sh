@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 [ "$DEBUG" == "1" ] && set -x
 
 if [ "${GLUSTER_PEER}" == "**ChangeMe**" ]; then
