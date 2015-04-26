@@ -21,6 +21,7 @@ ADD ./bin /usr/local/bin
 RUN chmod +x /usr/local/bin/*.sh
 ADD ./etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD ./etc/nginx/sites-available/asteroids /etc/nginx/sites-available/asteroids
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/sites-enabled/default
 RUN ln -s /etc/nginx/sites-available/asteroids /etc/nginx/sites-enabled/asteroids
 
