@@ -10,7 +10,7 @@ upstream nodejs {
 server {
     listen 80;
     location / {
-        root /mnt/rachervol/asteroids/client/;
+        root /mnt/ranchervol/asteroids/client/;
     }
 }
                                                                                 
