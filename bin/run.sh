@@ -10,8 +10,9 @@ if [ "${GLUSTER_PEER}" == "**ChangeMe**" ]; then
 fi
 
 echo "=> Mounting GlusterFS volume ${GLUSTER_VOL} from cluster ${GLUSTER_PEER}..."
-#mount -t glusterfs ${GLUSTER_PEER}:/${GLUSTER_VOL}  /mnt/${GLUSTER_VOL}
-glusterfs --volfile-server=${GLUSTER_PEER} --volfile-id=/${GLUSTER_VOL} /mnt/${GLUSTER_VOL}
+ping -c 10 ${GLUSTER_PEER} >/dev/null 2>&1
+mount -t glusterfs ${GLUSTER_PEER}:/${GLUSTER_VOL}  /mnt/${GLUSTER_VOL}
+#glusterfs --volfile-server=${GLUSTER_PEER} --volfile-id=/${GLUSTER_VOL} /mnt/${GLUSTER_VOL}
 
 if [ ! -d /mnt/${GLUSTER_VOL}/asteroids ]; then
    echo "=> Setting up asteroids game..."
