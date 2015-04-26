@@ -19,10 +19,10 @@ if [ ! -d /mnt/${GLUSTER_VOL}/asteroids ]; then
    pushd /mnt/${GLUSTER_VOL}
    git clone https://github.com/BonsaiDen/NodeGame-Shooter.git
    mv NodeGame-Shooter asteroids
-   my_public_ip=`dig -4 @ns1.google.com -t txt o-o.myaddr.l.google.com +short | sed "s/\"//g"`   
-   perl -p -i -e "s/HOST = '.*'/HOST = '$my_public_ip'/g" asteroids/client/config.js
-   perl -p -i -e "s/PORT = .*;/PORT = 82;/g" asteroids/client/config.js
    popd
 fi
+my_public_ip=`dig -4 @ns1.google.com -t txt o-o.myaddr.l.google.com +short | sed "s/\"//g"`   
+perl -p -i -e "s/HOST = '.*'/HOST = '$my_public_ip'/g" /mnt/${GLUSTER_VOL}/asteroids/client/config.js
+perl -p -i -e "s/PORT = .*;/PORT = 82;/g" /mnt/${GLUSTER_VOL}/asteroids/client/config.js
 
 /usr/bin/supervisord
