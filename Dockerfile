@@ -20,5 +20,6 @@ RUN mkdir -p /usr/local/bin
 ADD ./bin /usr/local/bin
 RUN chmod +x /usr/local/bin/*.sh
 ADD ./etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD ./etc/nginx/sites-available/asteroids /etc/nginx/sites-available/asteroids
 
 CMD ["/usr/local/bin/run.sh"]
