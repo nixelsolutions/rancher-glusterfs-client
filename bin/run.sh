@@ -23,6 +23,6 @@ if [ ! -d /mnt/${GLUSTER_VOL}/asteroids ]; then
 fi
 my_public_ip=`dig -4 @ns1.google.com -t txt o-o.myaddr.l.google.com +short | sed "s/\"//g"`   
 perl -p -i -e "s/HOST = '.*'/HOST = '$my_public_ip'/g" /mnt/${GLUSTER_VOL}/asteroids/client/config.js
-perl -p -i -e "s/PORT = .*;/PORT = 82;/g" /mnt/${GLUSTER_VOL}/asteroids/client/config.js
+perl -p -i -e "s/PORT = .*;/PORT = 81;/g" /mnt/${GLUSTER_VOL}/asteroids/client/config.js
 
 /usr/bin/supervisord
