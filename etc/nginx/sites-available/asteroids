@@ -10,12 +10,12 @@ upstream nodejs {
 server {
     listen HTTP_CLIENT_PORT;
     location / {
-        root ASTEROIDS_DOCUMENROOT/client/;
+        root HTTP_DOCUMENROOT/client/;
     }
 }
                                                                                 
 server {                                                                        
-    listen HTTP_SERVEER_PORT;                                                                  
+    listen HTTP_SERVER_PORT;                                                                  
     location / {                                                                
         proxy_pass http://nodejs;                                            
         proxy_http_version 1.1;                                                 
@@ -23,6 +23,6 @@ server {
         proxy_set_header Connection $connection_upgrade;                        
     }                                                                           
     location /index.html {                                                      
-        root ASTEROIDS_DOCUMENROOT/client/;                             
+        root HTTP_DOCUMENROOT/client/;                             
     }                                                                           
 }
