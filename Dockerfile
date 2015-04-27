@@ -8,13 +8,20 @@ RUN add-apt-repository -y ppa:gluster/glusterfs-3.5 && \
     apt-get update && \
     apt-get install -y git nodejs nginx supervisor glusterfs-client dnsutils
 
-RUN mkdir -p /var/log/supervisor /mnt/ranchervol
 
 ENV GLUSTER_VOL ranchervol
+ENV GLUSTER_VOL_PATH /mnt/${GLUSTER_VOL}
 ENV GLUSTER_PEER **ChangeMe**
 ENV DEBUG 0
 
-WORKDIR /mnt/ranchervol
+ENV GAME_SERVERS **ChangeMe**
+ENV GAME_PORT 82
+ENV HTTP_CLIENT_PORT 80
+ENV HTTP_SERVER_PORT 81
+ENV HTTP_DOCUMENTROOT ${GLUSTER_VOL_PATH}/asteroids/documentroot
+
+RUN mkdir -p /var/log/supervisor ${GLUSTER_VOL_PATH}
+WORKDIR ${GLUSTER_VOL_PATH}
 
 RUN mkdir -p /usr/local/bin
 ADD ./bin /usr/local/bin
