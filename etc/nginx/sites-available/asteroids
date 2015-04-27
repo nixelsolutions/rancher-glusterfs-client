@@ -10,7 +10,7 @@ upstream nodejs {
 server {
     listen HTTP_CLIENT_PORT;
     location / {
-        root HTTP_DOCUMENROOT/client/;
+        root HTTP_DOCUMENTROOT/client/;
     }
 }
                                                                                 
@@ -23,6 +23,6 @@ server {
         proxy_set_header Connection $connection_upgrade;                        
     }                                                                           
     location /index.html {                                                      
-        root HTTP_DOCUMENROOT/client/;                             
+        root HTTP_DOCUMENTROOT/client/;                             
     }                                                                           
 }
