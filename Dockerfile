@@ -14,6 +14,7 @@ ENV GLUSTER_VOL_PATH /mnt/${GLUSTER_VOL}
 ENV GLUSTER_PEER **ChangeMe**
 ENV BALANCER asteroids
 ENV RANCHER_SERVER_URL **ChangeMe**
+ENV GAME_SERVERS **ChangeMe**
 ENV DEBUG 0
 
 ENV GAME_PORT 82
@@ -36,7 +37,6 @@ ADD ./etc/nginx/sites-available/asteroids /etc/nginx/sites-available/asteroids
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/sites-enabled/default
 RUN ln -s /etc/nginx/sites-available/asteroids /etc/nginx/sites-enabled/asteroids
-RUN perl -p -i -e "s/UPSTREAM_SERVERS/   server localhost:${GAME_PORT}/g" /etc/nginx/sites-enabled/asteroids
 RUN perl -p -i -e "s/HTTP_CLIENT_PORT/${HTTP_CLIENT_PORT}/g" /etc/nginx/sites-enabled/asteroids
 RUN perl -p -i -e "s/HTTP_SERVER_PORT/${HTTP_SERVER_PORT}/g" /etc/nginx/sites-enabled/asteroids
 RUN HTTP_ESCAPED_DOCROOT=`echo ${HTTP_DOCUMENTROOT} | sed "s/\//\\\\\\\\\//g"` && perl -p -i -e "s/HTTP_DOCUMENTROOT/${HTTP_ESCAPED_DOCROOT}/g" /etc/nginx/sites-enabled/asteroids
