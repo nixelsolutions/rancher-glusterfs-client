@@ -40,7 +40,7 @@ perl -p -i -e "s/HOST = '.*'/HOST = '${my_public_ip}'/g" ${HTTP_DOCUMENTROOT}/cl
 perl -p -i -e "s/PORT = .*;/PORT = ${HTTP_SERVER_PORT};/g" ${HTTP_DOCUMENTROOT}/client/config.js
 
 unset UPSTREAM_SERVERS
-if [ "${GAME_SERVERS} == "**ChangeMe**" ]; then
+if [ "${GAME_SERVERS}" == "**ChangeMe**" ]; then
    UPSTREAM_SERVERS="server localhost:${GAME_PORT};"
 else
    for server in `echo ${GAME_SERVERS} | sed "s/,/ /g"`; do
