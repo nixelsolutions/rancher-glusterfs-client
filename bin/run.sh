@@ -44,7 +44,7 @@ if [ "${GAME_SERVERS}" == "**ChangeMe**" ]; then
    UPSTREAM_SERVERS="server localhost:${GAME_PORT};"
 else
    for server in `echo ${GAME_SERVERS} | sed "s/,/ /g"`; do
-       if [ ! -z ${UPSTREAM_SERVERS} ]; then
+       if [ ! -z "${UPSTREAM_SERVERS}" ]; then
           SERVER_PARAMS="backup"
        fi
        UPSTREAM_SERVERS="server $server:${GAME_PORT} ${SERVER_PARAMS};\n${UPSTREAM_SERVERS}" 
