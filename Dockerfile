@@ -40,6 +40,6 @@ RUN perl -p -i -e "s/UPSTREAM_SERVERS/   server localhost:${GAME_PORT}/g" /etc/n
 RUN perl -p -i -e "s/HTTP_CLIENT_PORT/${HTTP_CLIENT_PORT}/g" /etc/nginx/sites-enabled/asteroids
 RUN perl -p -i -e "s/HTTP_SERVER_PORT/${HTTP_SERVER_PORT}/g" /etc/nginx/sites-enabled/asteroids
 RUN HTTP_ESCAPED_DOCROOT=`echo ${HTTP_DOCUMENTROOT} | sed "s/\//\\\\\\\\\//g"` && perl -p -i -e "s/HTTP_DOCUMENTROOT/${HTTP_ESCAPED_DOCROOT}/g" /etc/nginx/sites-enabled/asteroids
-RUN perl -p -i -e "s/GAME_PORT/${GAME_PORT}/g" /etc/supervisord.conf
+RUN perl -p -i -e "s/GAME_PORT/${GAME_PORT}/g" /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["/usr/local/bin/run.sh"]
