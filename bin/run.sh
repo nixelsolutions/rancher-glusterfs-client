@@ -9,6 +9,11 @@ if [ "${GLUSTER_PEER}" == "**ChangeMe**" ]; then
    exit 0
 fi
 
+if [ "${BALANCER_IP}" == "**ChangeMe**" ]; then
+   echo "ERROR: You did not specify "BALANCER_IP" environment variable - Exiting..."
+   exit 0
+fi
+
 if [ "${RANCHER_SERVER_URL}" != "**ChangeMe**" ]; then
    # Stuff for active-passive load balancing because game does not share sessions across containers
    # Unused on 1.x version
@@ -35,8 +40,7 @@ if [ ! -d ${HTTP_DOCUMENTROOT} ]; then
    git clone https://github.com/BonsaiDen/NodeGame-Shooter.git ${HTTP_DOCUMENTROOT}
 fi
 
-my_public_ip=`dig -4 @ns1.google.com -t txt o-o.myaddr.l.google.com +short | sed "s/\"//g"`
-perl -p -i -e "s/HOST = '.*'/HOST = '${my_public_ip}'/g" ${HTTP_DOCUMENTROOT}/client/config.js
+perl -p -i -e "s/HOST = '.*'/HOST = '${BALANCER_IP}'/g" ${HTTP_DOCUMENTROOT}/client/config.js
 perl -p -i -e "s/PORT = .*;/PORT = ${HTTP_SERVER_PORT};/g" ${HTTP_DOCUMENTROOT}/client/config.js
 
 unset UPSTREAM_SERVERS
