@@ -12,7 +12,6 @@ RUN add-apt-repository -y ppa:gluster/glusterfs-3.5 && \
 ENV GLUSTER_VOL ranchervol
 ENV GLUSTER_VOL_PATH /mnt/${GLUSTER_VOL}
 ENV GLUSTER_PEER **ChangeMe**
-ENV BALANCER_IP **ChangeMe**
 ENV BALANCER asteroids
 ENV RANCHER_SERVER_URL **ChangeMe**
 ENV GAME_SERVERS **ChangeMe**
