@@ -40,15 +40,17 @@ perl -p -i -e "s/HOST = '.*'/HOST = '${my_public_ip}'/g" ${HTTP_DOCUMENTROOT}/cl
 perl -p -i -e "s/PORT = .*;/PORT = ${HTTP_SERVER_PORT};/g" ${HTTP_DOCUMENTROOT}/client/config.js
 
 unset UPSTREAM_SERVERS
-if [ "${GAME_SERVERS} != "**ChangeMe**" ]; then
+if [ "${GAME_SERVERS} == "**ChangeMe**" ]; then
+   UPSTREAM_SERVERS="server localhost:${GAME_PORT};"
+else
    for server in `echo ${GAME_SERVERS} | sed "s/,/ /g"`; do
        if [ ! -z ${UPSTREAM_SERVERS} ]; then
           SERVER_PARAMS="backup"
        fi
-       UPSTREAM_SERVERS="server $server ${GAME_PORT} ${SERVER_PARAMS};\n${UPSTREAM_SERVERS}" 
+       UPSTREAM_SERVERS="server $server:${GAME_PORT} ${SERVER_PARAMS};\n${UPSTREAM_SERVERS}" 
    done
 fi
 
-perl -p -i -e "s/UPSTREAM_SERVERS/${UPSTREAM_SERVERS}/g" /etc/nginx/sites-enabled/asteroids
+perl -p -i -e "s/UPSTREAM_SERVERS;/${UPSTREAM_SERVERS}/g" /etc/nginx/sites-enabled/asteroids
 
 /usr/bin/supervisord
