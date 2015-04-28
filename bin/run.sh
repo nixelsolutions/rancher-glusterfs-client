@@ -9,10 +9,10 @@ if [ "${GLUSTER_PEER}" == "**ChangeMe**" ]; then
    exit 0
 fi
 
-if [ "${TYPE}" == "**ChangeMe**" ]; then
-   echo "ERROR: You did not specify "TYPE" environment variable - Exiting..."
-   exit 0
-fi
+#if [ "${TYPE}" == "**ChangeMe**" ]; then
+#   echo "ERROR: You did not specify "TYPE" environment variable - Exiting..."
+#   exit 0
+#fi
 
 if [ "${RANCHER_SERVER_URL}" != "**ChangeMe**" ]; then
    # Stuff for active-passive load balancing because game does not share sessions across containers
