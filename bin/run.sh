@@ -26,7 +26,7 @@ if [ "$ALIVE" == 0 ]; then
    exit 1
 fi
 
-echo "=> Mounting GlusterFS volume ${GLUSTER_VOL} from GlusterFS node ${PEER}..."
+echo "=> Mounting GlusterFS volume ${GLUSTER_VOL} from GlusterFS node ${PEER} ..."
 mount -t glusterfs ${PEER}:/${GLUSTER_VOL} ${GLUSTER_VOL_PATH}
 
 echo "=> Setting up asteroids game..."
@@ -34,10 +34,8 @@ if [ ! -d ${HTTP_DOCUMENTROOT} ]; then
    git clone https://github.com/BonsaiDen/NodeGame-Shooter.git ${HTTP_DOCUMENTROOT}
 fi
 
-if [ `echo ${TYPE} | tr '[:lower:]' '[:upper:]'` == "GAME_SERVER" ]; then
-   my_public_ip=`dig -4 @ns1.google.com -t txt o-o.myaddr.l.google.com +short | sed "s/\"//g"`
-   perl -p -i -e "s/HOST = '.*'/HOST = '${my_public_ip}'/g" ${HTTP_DOCUMENTROOT}/client/config.js
-   perl -p -i -e "s/PORT = .*;/PORT = ${HTTP_SERVER_PORT};/g" ${HTTP_DOCUMENTROOT}/client/config.js
-fi
+my_public_ip=`dig -4 @ns1.google.com -t txt o-o.myaddr.l.google.com +short | sed "s/\"//g"`
+perl -p -i -e "s/HOST = '.*'/HOST = '${my_public_ip}'/g" ${HTTP_DOCUMENTROOT}/client/config.js
+perl -p -i -e "s/PORT = .*;/PORT = ${HTTP_SERVER_PORT};/g" ${HTTP_DOCUMENTROOT}/client/config.js
 
 /usr/bin/supervisord
