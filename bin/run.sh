@@ -23,7 +23,7 @@ done
 
 if [ "$ALIVE" == 0 ]; then
    echo "ERROR: could not contact any GlusterFS node from this list: ${GLUSTER_PEER} - Exiting..."
-   exit 0
+   exit 1
 fi
 
 echo "=> Mounting GlusterFS volume ${GLUSTER_VOL} from GlusterFS node ${PEER}..."
