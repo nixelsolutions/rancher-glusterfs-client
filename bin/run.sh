@@ -9,6 +9,23 @@ if [ "${GLUSTER_PEER}" == "**ChangeMe**" ]; then
    exit 0
 fi
 
+ALIVE=0
+for PEER in `echo "${GLUSTER_PEER}" | sed "s/,/ /g"`; do
+    echo "=> Checking if I can reach GlusterFS node ${PEER} ..."
+    if ping -c 10 ${PEER} >/dev/null 2>&1; then
+       echo "=> GlusterFS node ${PEER} is alive"
+       ALIVE=1
+       break
+    else
+       echo "*** Could not reach server ${PEER} ..."
+    fi
+done
+
+if [ "$ALIVE" == 0 ]; then
+   echo "ERROR: could not contact any GlusterFS node from this list: ${GLUSTER_PEER} - Exiting..."
+   exit 0
+fi
+
 echo "=> Mounting GlusterFS volume ${GLUSTER_VOL} from cluster ${GLUSTER_PEER}..."
 mount -t glusterfs ${GLUSTER_PEER}:/${GLUSTER_VOL} ${GLUSTER_VOL_PATH}
 
