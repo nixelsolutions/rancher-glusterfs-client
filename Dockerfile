@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get install -y python-software-properties software-properties-common
 RUN add-apt-repository -y ppa:gluster/glusterfs-3.5 && \
     apt-get update && \
-    apt-get install -y git nodejs nginx supervisor glusterfs-client dnsutils jq wget
+    apt-get install -y git nodejs nginx supervisor glusterfs-client dnsutils
 
 
 ENV GLUSTER_VOL ranchervol
