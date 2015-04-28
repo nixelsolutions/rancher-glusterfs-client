@@ -12,19 +12,14 @@ RUN add-apt-repository -y ppa:gluster/glusterfs-3.5 && \
 ENV GLUSTER_VOL ranchervol
 ENV GLUSTER_VOL_PATH /mnt/${GLUSTER_VOL}
 ENV GLUSTER_PEER **ChangeMe**
-ENV BALANCER asteroids
-ENV RANCHER_SERVER_URL **ChangeMe**
-ENV GAME_SERVERS **ChangeMe**
-ENV TYPE **ChangeMe**
 ENV DEBUG 0
 
-ENV GAME_PORT 82
 ENV HTTP_CLIENT_PORT 80
-ENV HTTP_SERVER_PORT 443
+ENV GAME_SERVER_PORT 443
 ENV HTTP_DOCUMENTROOT ${GLUSTER_VOL_PATH}/asteroids/documentroot
 
 EXPOSE ${HTTP_CLIENT_PORT}
-EXPOSE ${HTTP_SERVER_PORT}
+EXPOSE ${GAME_SERVER_PORT}
 
 RUN mkdir -p /var/log/supervisor ${GLUSTER_VOL_PATH}
 WORKDIR ${GLUSTER_VOL_PATH}
@@ -39,10 +34,9 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm -f /etc/nginx/sites-enabled/default
 RUN ln -fs /etc/nginx/sites-available/asteroids /etc/nginx/sites-enabled/asteroids
 RUN perl -p -i -e "s/HTTP_CLIENT_PORT/${HTTP_CLIENT_PORT}/g" /etc/nginx/sites-enabled/asteroids
-RUN perl -p -i -e "s/HTTP_SERVER_PORT/${HTTP_SERVER_PORT}/g" /etc/nginx/sites-enabled/asteroids
 RUN HTTP_ESCAPED_DOCROOT=`echo ${HTTP_DOCUMENTROOT} | sed "s/\//\\\\\\\\\//g"` && perl -p -i -e "s/HTTP_DOCUMENTROOT/${HTTP_ESCAPED_DOCROOT}/g" /etc/nginx/sites-enabled/asteroids
 
-RUN perl -p -i -e "s/GAME_PORT/${GAME_PORT}/g" /etc/supervisor/conf.d/supervisord.conf
+RUN perl -p -i -e "s/GAME_SERVER_PORT/${GAME_SERVER_PORT}/g" /etc/supervisor/conf.d/supervisord.conf
 RUN HTTP_ESCAPED_DOCROOT=`echo ${HTTP_DOCUMENTROOT} | sed "s/\//\\\\\\\\\//g"` && perl -p -i -e "s/HTTP_DOCUMENTROOT/${HTTP_ESCAPED_DOCROOT}/g" /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["/usr/local/bin/run.sh"]
