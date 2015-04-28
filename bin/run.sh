@@ -26,8 +26,8 @@ if [ "$ALIVE" == 0 ]; then
    exit 0
 fi
 
-echo "=> Mounting GlusterFS volume ${GLUSTER_VOL} from cluster ${GLUSTER_PEER}..."
-mount -t glusterfs ${GLUSTER_PEER}:/${GLUSTER_VOL} ${GLUSTER_VOL_PATH}
+echo "=> Mounting GlusterFS volume ${GLUSTER_VOL} from GlusterFS node ${PEER}..."
+mount -t glusterfs ${PEER}:/${GLUSTER_VOL} ${GLUSTER_VOL_PATH}
 
 echo "=> Setting up asteroids game..."
 if [ ! -d ${HTTP_DOCUMENTROOT} ]; then
