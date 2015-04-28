@@ -36,6 +36,6 @@ fi
 
 my_public_ip=`dig -4 @ns1.google.com -t txt o-o.myaddr.l.google.com +short | sed "s/\"//g"`
 perl -p -i -e "s/HOST = '.*'/HOST = '${my_public_ip}'/g" ${HTTP_DOCUMENTROOT}/client/config.js
-perl -p -i -e "s/PORT = .*;/PORT = ${HTTP_SERVER_PORT};/g" ${HTTP_DOCUMENTROOT}/client/config.js
+perl -p -i -e "s/PORT = .*;/PORT = ${GAME_SERVER_PORT};/g" ${HTTP_DOCUMENTROOT}/client/config.js
 
 /usr/bin/supervisord
